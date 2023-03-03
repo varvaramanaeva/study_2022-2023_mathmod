@@ -96,9 +96,9 @@ header-includes:
 
  |
 :--------------|--------------:
-![По теореме Гауса](./image/gaus.png){#fig:001} | ![Поток в ячейке](./image/potok_yach.png){#fig:001 width=40%}
+\oint_{S}D\cdot n ds = 0 | ![Поток в ячейке](./image/potok_yach.png){#fig:001 width=40%}
 
-![Уравнение Лапласа](./image/laplas.png){#fig:001}
+\frac{\partial^2x}{\partial x^2} + \frac{\partial^2y}{\partial y^2} + \frac{\partial^2z}{\partial z^2} = 0
 
 ## Формулы
 
