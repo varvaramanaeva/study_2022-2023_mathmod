@@ -1,6 +1,6 @@
 ---
 ## Front matter
-title: "Отчёт по лабораторной работе №6"
+title: "Отчёт по лабораторной работе №8"
 subtitle: "Предмет: Математическое моделирование"
 author: "Манаева Варвара Евгеньевна, НФИбд-01-20.
 1032201197"
@@ -234,12 +234,6 @@ $$ \widetilde{M_{+}} = Nq \frac{\tau}{\delta}(1 - \frac{\widetilde{p}}{p_{cr}})\
     savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\report\\image\\graph1_t.png")
     savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\presentation\\image\\graph1_t.png")
     clf()
-    title("Случай 1 (параметрический)")
-    plot(m1, m2, color="green")
-    xlabel("Доход компании 1")
-    ylabel("Доход компании 2")
-    savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\report\\image\\graph1.png")
-    clf()
     
     ode = ODEProblem(f2, [M1,M2], range)
     sol = solve(ode, dtmax=0.01)
@@ -253,12 +247,6 @@ $$ \widetilde{M_{+}} = Nq \frac{\tau}{\delta}(1 - \frac{\widetilde{p}}{p_{cr}})\
     ylabel("Доход компаний")
     savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\report\\image\\graph2_t.png")
     savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\presentation\\image\\graph2_t.png")
-    clf()
-    title("Случай 2 (параметрический)")
-    plot(m1, m2, color="green")
-    xlabel("Доход компании 1")
-    ylabel("Доход компании 2")
-    savefig("C:\\Users\\emanaev\\work\\study\\2022-2023\\Математическое_моделирование\\study_2022-2023_mathmod\\labs\\lab8\\report\\image\\graph2.png")
     clf()
 
 #### Результаты работы кода на Julia
@@ -275,13 +263,13 @@ $$ \widetilde{M_{+}} = Nq \frac{\tau}{\delta}(1 - \frac{\widetilde{p}}{p_{cr}})\
 #### Программный код решения на OPenModelica
 
     model konkurencia
-    parameter Real p_cr = 10.7;
-    parameter Real tau1 = 13;
-    parameter Real p1 = 6.2;
-    parameter Real tau2 = 20;
-    parameter Real p2 = 4.4;
-    parameter Real N = 25;
-    parameter Real q = 1;
+    parameter Real p_cr = 35;//критическая стоимость продукта
+    parameter Real tau1 = 35;//длительность производственного цикла фирмы 1
+    parameter Real p1 = 13.3;//себестоимость продукта у фирмы 1
+    parameter Real tau2 = 30;//длительность производственного цикла фирмы 2
+    parameter Real p2 = 14.5; //себестоимость продукта у фирмы 2
+    parameter Real N = 93; //число потребителей производимого продукта
+    parameter Real q = 1; //максимальная потребность одного человека в продукте в единицу времени
     
     parameter Real a1 = p_cr/(tau1*tau1*p1*p1*N*q);
     parameter Real a2 = p_cr/(tau2*tau2*p2*p2*N*q);
@@ -289,21 +277,22 @@ $$ \widetilde{M_{+}} = Nq \frac{\tau}{\delta}(1 - \frac{\widetilde{p}}{p_{cr}})\
     parameter Real c1 = (p_cr-p1)/(tau1*p1);
     parameter Real c2 = (p_cr-p2)/(tau2*p2);
     
-    parameter Real d = 0.0011;
+    parameter Real d = 0.00018;
     
-    Real M1_1(start=4);
-    Real M2_1(start=3.5);
+    Real M1_1(start=8);
+    Real M2_1(start=9);
     
-    Real M1_2(start=4);
-    Real M2_2(start=3.5);
+    Real M1_2(start=8);
+    Real M2_2(start=9);
     
     equation
-    // Первый случай
       der(M1_1) = M1_1-(b/c1)*M1_1*M2_1-(a1/c1)*M1_1*M1_1;
       der(M2_1) = (c2/c1)*M2_1-(b/c1)*M1_1*M2_1-(a2/c1)*M2_1*M2_1;
-    // Второй случай
+      
       der(M1_2) = M1_2-(b/c1+d)*M1_2*M2_2-(a1/c1)*M1_2*M1_2;
       der(M2_2) = (c2/c1)*M2_2-(b/c1)*M1_2*M2_2-(a2/c1)*M2_2*M2_2;
+      
+      annotation(experiment(StartTime=0, StopTime=20, Tolerance=1e-6, Interval=0.05));
     end konkurencia;
 
 
@@ -323,7 +312,7 @@ $$ \widetilde{M_{+}} = Nq \frac{\tau}{\delta}(1 - \frac{\widetilde{p}}{p_{cr}})\
 В ходе выполнения лабораторной работы была изучена модель конкуренции для двух фирм в двух случаях. Были запрограммированы решения для задачи лабораторной работы на Julia и OpenModelica.
 Были построены графики прибыли компаний для двух условий задачи.
 
-Были записаны скринкасты [лабораторной работы]( "лабораторной работы") и [презентации лабораторной работы]( "презентации лабораторной работы").
+Были записаны скринкасты [лабораторной работы](https://www.youtube.com/watch?v=htc8PLBXYsY "лабораторной работы") и [презентации лабораторной работы](https://youtu.be/rg31IkKNUNE "презентации лабораторной работы").
 
 # Список литературы
 
